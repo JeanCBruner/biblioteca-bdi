@@ -1,0 +1,7 @@
+REMOVER qtdPaginas da tabela livro
+
+criar tabela autores
+remover telefone da tabela editora
+
+apagar tabela endereco ???
+criar tabela pessoa ???? -> autor + leitor
