@@ -67,7 +67,7 @@ if ($qtd > 0) {
         print "<td>" . $row->leitor_id . "</td>";
         print "<td>" . $row->nome_leitor . "</td>";
         print "<td>" . $row->total_locacoes_finalizadas . "</td>";
-        print "<td>" . $row->livro_mais_recente_ativo . "</td>";
+        print "<td>" . ($row->livro_mais_recente_ativo ? $row->livro_mais_recente_ativo : "Nenhum") . "</td>";
         print "<td>" . $row->livro_mais_recente_finalizado . "</td>";
         print "</tr>";
     }
