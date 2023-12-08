@@ -56,3 +56,10 @@
 
     <button type="submit" class="btn btn-success btn-lg btn-block">Enviar</button>
 </form>
+
+<script>
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2();
+        $('.js-example-responsive').select2();
+    });
+</script>
