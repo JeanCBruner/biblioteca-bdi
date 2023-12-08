@@ -77,12 +77,19 @@
             <a class="dropdown-item" href="?page=locacao_listar">Listar</a>
           </div>
         </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Relatórios
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="?page=relatorio_cliente_qtdlocacoes">Clientes que mais alugaram</a>
+            <a class="dropdown-item" href="?page=relatorio_cliente_ultimo">Ultimo livro alugado por cada cliente</a>
+            <a class="dropdown-item" href="?page=relatorio_livro_quantidade">Livros mais alugados</a>
+            <a class="dropdown-item" href="?page=relatorio_categoria_buscadas">Categorias mais buscadas</a>
+          </div>
+        </li>
       </ul>
-      <!--
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      -->
       </form>
     </div>
   </nav>
@@ -148,6 +155,7 @@
           case 'leitor_salvar':
             include('leitor_salvar.php');
             break;
+            //LOCAÇÕES
           case 'locacao_cadastrar':
             include('locacao_cadastrar.php');
             break;
@@ -159,6 +167,19 @@
             break;
           case 'locacao_listar':
             include('locacao_listar.php');
+            break;
+            //RELATORIOS
+          case 'relatorio_categoria_buscadas':
+            include('relatorio_categoria_buscadas.php');
+            break;
+          case 'relatorio_cliente_ultimo':
+            include('relatorio_cliente_ultimo.php');
+            break;
+          case 'relatorio_livro_quantidade':
+            include('relatorio_cliente_qtdlocacoes.php');
+            break;
+          case 'relatorio_cliente_qtdlocacoes':
+            include('relatorio_cliente_qtdlocacoes.php');
             break;
           default:
             print "<h1> Seja bem vindo! Versão Final</h1>";
