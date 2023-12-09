@@ -10,25 +10,49 @@ switch ($_REQUEST['acao']) {
         $leitorId = $_POST['leitor_id_leitor'];
         $statusLocacaoId = 1; // Definindo o status (assumindo que 1 é o status padrão)
         $valorLocacao = $_POST['valor_locacao']; // Utilizando o valor já fornecido
-
-        // Inserção da locação
-        $sqlLocacao = "INSERT INTO locacao (dataLocacao, dataDevolucaoEstimada, observacoes, livro_id, leitor_id, status_locacao_id, valorLocacao) VALUES (
-            '$dataLocacao', 
-            '$dataDevolucaoEstimada',
-            '$observacoes',
-            '$livroId', 
-            '$leitorId',
-            '$statusLocacaoId',
-            '$valorLocacao'
-        )";
-
-        $resLocacao = $conn->query($sqlLocacao);
-
-        if ($resLocacao) {
-            print "<script>alert('Locação realizada com sucesso!');</script>";
-            print "<script>location.href='?page=locacao_listar';</script>";
+    
+        // Verificar se o leitor tem locações ativas
+        $sqlVerificarLocacoesAtivas = "SELECT COUNT(id) AS qtd_locacoes_ativas
+                                        FROM locacao
+                                        WHERE leitor_id = $leitorId
+                                        AND status_locacao_id = 1";
+    
+        $resultadoVerificacao = $conn->query($sqlVerificarLocacoesAtivas);
+    
+        if ($resultadoVerificacao) {
+            $rowVerificacao = $resultadoVerificacao->fetch_assoc();
+            $qtdLocacoesAtivas = $rowVerificacao['qtd_locacoes_ativas'];
+    
+            if ($qtdLocacoesAtivas > 0) {
+                // O usuário tem locações em aberto, não pode locar um novo livro
+                print "<script>alert('O leitor possui locações em aberto e não pode locar um novo livro no momento.');</script>";
+                print "<script>location.href='?page=locacao_listar';</script>";
+            } else {
+                // O usuário não tem locações em aberto, prosseguir com a inserção da locação
+                // Inserção da locação
+                $sqlLocacao = "INSERT INTO locacao (dataLocacao, dataDevolucaoEstimada, observacoes, livro_id, leitor_id, status_locacao_id, valorLocacao) VALUES (
+                    '$dataLocacao', 
+                    '$dataDevolucaoEstimada',
+                    '$observacoes',
+                    '$livroId', 
+                    '$leitorId',
+                    '$statusLocacaoId',
+                    '$valorLocacao'
+                )";
+    
+                $resLocacao = $conn->query($sqlLocacao);
+    
+                if ($resLocacao) {
+                    print "<script>alert('Locação realizada com sucesso!');</script>";
+                    print "<script>location.href='?page=locacao_listar';</script>";
+                } else {
+                    print "<script>alert('Não foi possível realizar a operação!');</script>";
+                    print "<script>location.href='?page=locacao_listar';</script>";
+                }
+            }
         } else {
-            print "<script>alert('Não foi possível realizar a operação!');</script>";
+            // Tratar erros na verificação, se necessário
+            print "<script>alert('Erro na verificação de locações ativas!');</script>";
             print "<script>location.href='?page=locacao_listar';</script>";
         }
         break;

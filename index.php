@@ -74,7 +74,8 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="?page=locacao_cadastrar">Realizar</a>
-            <a class="dropdown-item" href="?page=locacao_listar">Listar</a>
+            <a class="dropdown-item" href="?page=locacao_listar">Ativas</a>
+            <a class="dropdown-item" href="?page=locacao_historico">Finalizadas</a>
           </div>
         </li>
 
@@ -168,6 +169,9 @@
           case 'locacao_listar':
             include('locacao_listar.php');
             break;
+            case 'locacao_historico':
+              include('locacao_historico.php');
+            break;
             //RELATORIOS
           case 'relatorio_categoria_buscadas':
             include('relatorio_categoria_buscadas.php');
@@ -176,7 +180,7 @@
             include('relatorio_cliente_ultimo.php');
             break;
           case 'relatorio_livro_quantidade':
-            include('relatorio_cliente_qtdlocacoes.php');
+            include('relatorio_livro_quantidade.php');
             break;
           case 'relatorio_cliente_qtdlocacoes':
             include('relatorio_cliente_qtdlocacoes.php');

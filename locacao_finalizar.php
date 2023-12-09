@@ -37,7 +37,7 @@ $row1 = $res1->fetch_object();
 
     <div class="mb-3">
         <label for="data_devolucao_real">Data Devolucao Real</label>
-        <input type="date" value="<?php print $row1->dataDevolucaoReal; ?>" name="data_devolucao_real" id="data_devolucao_real" class="form-control" min="<?php print $row1->dataDevolucaoEstimada; ?>" onchange="atualizaValorMulta()">
+        <input type="date" value="<?php print $row1->dataDevolucaoReal; ?>" name="data_devolucao_real" id="data_devolucao_real" class="form-control" min="<?php print $row1->dataLocacao; ?>" onchange="atualizaValorMulta()">
     </div>
 
     <div class="mb-3">
@@ -69,18 +69,6 @@ $row1 = $res1->fetch_object();
 </form>
 
 <script>
-    function validaDataDevolucao() {
-        var dataDevolucaoEstimada = new Date("<?php print $row1->dataDevolucaoEstimada; ?>");
-        var dataDevolucaoReal = new Date(document.forms[0].elements['data_devolucao_real'].value);
-
-        if (dataDevolucaoReal <= dataDevolucaoEstimada) {
-            alert('A data de devolução real deve ser superior à data de devolução estimada.');
-            return false;
-        }
-
-        return true;
-    }
-
     function calcularMulta(dataDevolucaoReal, dataDevolucaoEstimada) {
         var diferencaDias = (dataDevolucaoReal - dataDevolucaoEstimada) / (1000 * 60 * 60 * 24);
         diferencaDias = Math.max(0, diferencaDias);
@@ -94,12 +82,6 @@ $row1 = $res1->fetch_object();
     function atualizaValorMulta() {
         var dataDevolucaoEstimada = new Date("<?php print $row1->dataDevolucaoEstimada; ?>");
         var dataDevolucaoReal = new Date(document.forms[0].elements['data_devolucao_real'].value);
-
-        // Ajuste: Se a data de devolução real for igual à data de devolução estimada, a multa é zero
-        if (dataDevolucaoReal < dataDevolucaoEstimada) {
-            alert('A data de devolução real deve ser igual ou superior à data de devolução estimada.');
-            return;
-        }
 
         var valorMulta = calcularMulta(dataDevolucaoReal, dataDevolucaoEstimada);
         var valorTotal = parseFloat(<?php print $row1->valorLocacao; ?>) + parseFloat(valorMulta);

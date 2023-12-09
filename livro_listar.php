@@ -2,7 +2,7 @@
 
 <?php
 
-$sql = "SELECT livro.id AS idLivro, livro.nome AS nomeLivro, autor, anoPublicacao, qtdExemplares, GROUP_CONCAT(categoria.nome ORDER BY categoria.nome ASC) AS categorias
+$sql = "SELECT livro.id AS idLivro, livro.nome AS nomeLivro, autor, anoPublicacao, qtdExemplares, GROUP_CONCAT(categoria.nome ORDER BY categoria.nome ASC) AS categorias, editora.nome AS nomeEditora
         FROM livro
         INNER JOIN livro_categoria ON (livro.id = livro_categoria.livro_id)
         INNER JOIN categoria ON (categoria.id = livro_categoria.categoria_id)
@@ -20,6 +20,7 @@ if ($qtd > 0) {
     print "<th>Nome</th>";
     print "<th>Autor</th>";
     print "<th>Ano de Publicação</th>";
+    print "<th>Editora</th>";
     print "<th>Categorias</th>";
     print "<th>Exemplares</th>";
     print "<th>Ações</th>";
@@ -30,11 +31,12 @@ if ($qtd > 0) {
         print "<td>" . $row->nomeLivro . "</td>";
         print "<td>" . $row->autor . "</td>";
         print "<td>" . $row->anoPublicacao . "</td>";
+        print "<td>" . $row->nomeEditora . "</td>";
         print "<td>" . $row->categorias . "</td>";
         print "<td>" . $row->qtdExemplares . "</td>";
         print "<td>
-            <button onclick=\"location.href='?page=livro_editar&id_livro=" . $row->idLivro . "';\" class ='btn btn-primary'>Editar</button>
-            <button onclick=\"location.href='?page=livro_salvar&acao=excluir&id_livro=" . $row->idLivro . "'\" class ='btn btn-danger'>Excluir</button>
+            <button onclick=\"location.href='?page=livro_editar&id_livro=" . $row->idLivro . "';\" class ='btn btn-primary btn-block'>Editar</button>
+            <button onclick=\"location.href='?page=livro_salvar&acao=excluir&id_livro=" . $row->idLivro . "'\" class ='btn btn-danger btn-block'>Excluir</button>
         </td>";
         print "</tr>";
     }
