@@ -43,6 +43,9 @@ switch ($_REQUEST['acao']) {
                 $resLocacao = $conn->query($sqlLocacao);
     
                 if ($resLocacao) {
+                    $sqlDecrementExemplares = "UPDATE livro SET qtdExemplares = qtdExemplares - 1 WHERE id = '$livroId'";
+                    $conn->query($sqlDecrementExemplares);
+
                     print "<script>alert('Locação realizada com sucesso!');</script>";
                     print "<script>location.href='?page=locacao_listar';</script>";
                 } else {
@@ -57,34 +60,52 @@ switch ($_REQUEST['acao']) {
         }
         break;
     case 'finalizar':
-        // Dados da locação
-        $locacaoId = $_POST['id_locacao'];
-        $dataDevolucaoReal = $_POST['data_devolucao_real'];
-        $multa = $_POST['valor_multa'];
-        $total = $_POST['valor_final'];
-        $observacoesFinais = $_POST['observacoes_finais'];
+    // Dados da locação
+    $locacaoId = $_POST['id_locacao'];
+    $dataDevolucaoReal = $_POST['data_devolucao_real'];
+    $multa = $_POST['valor_multa'];
+    $total = $_POST['valor_final'];
+    $observacoesFinais = $_POST['observacoes_finais'];
 
-        $sqlLocacao = "UPDATE locacao SET
-                            dataDevolucaoReal = '$dataDevolucaoReal',
-                            valorMulta = '$multa',
-                            valorFinal = '$total',
-                            observacoesFinais = '$observacoesFinais',
-                            status_locacao_id = 2
-                        WHERE
-                            id = '$locacaoId'";
+    // Consulta para obter informações da locação
+    $sqlLocacao = "SELECT * FROM locacao WHERE id = '$locacaoId'";
+    $resLocacao = $conn->query($sqlLocacao);
 
-        $resLocacao = $conn->query($sqlLocacao);
+    if ($resLocacao->num_rows > 0) {
+        $rowLocacao = $resLocacao->fetch_object();
+
+        // Obtém o ID do livro alugado
+        $livroId = $rowLocacao->livro_id;
+
+        // Atualiza a locação
+        $sqlAtualizarLocacao = "UPDATE locacao SET
+                                    dataDevolucaoReal = '$dataDevolucaoReal',
+                                    valorMulta = '$multa',
+                                    valorFinal = '$total',
+                                    observacoesFinais = '$observacoesFinais',
+                                    status_locacao_id = 2
+                                WHERE
+                                    id = '$locacaoId'";
+        $resAtualizarLocacao = $conn->query($sqlAtualizarLocacao);
+
+        // Atualiza a quantidade de exemplares do livro (incrementa +1)
+        $sqlIncrementExemplares = "UPDATE livro SET qtdExemplares = qtdExemplares + 1 WHERE id = '$livroId'";
+        $conn->query($sqlIncrementExemplares);
 
         // Verificar se a atualização foi bem-sucedida
-        if ($resLocacao) {
+        if ($resAtualizarLocacao) {
             print "<script>alert('Locação finalizada com sucesso!');</script>";
-            // print "<script>location.href='?page=locacao_listar';</script>";
+            print "<script>location.href='?page=locacao_listar';</script>";
         } else {
             print "<script>alert('Não foi possível finalizar a locação!');</script>";
-            // print "<script>location.href='?page=locacao_listar';</script>";
+            print "<script>location.href='?page=locacao_listar';</script>";
         }
+    } else {
+        print "<script>alert('Locação não encontrada!');</script>";
+    }
 
-        break;
+    break;
+
     case 'excluir':
 
         $idLocacao = $_REQUEST['id_locacao'];

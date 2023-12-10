@@ -25,7 +25,7 @@
         <label>Livro</label>
         <select class="form-control js-example-responsive" name="livro_id_livro">
             <?php
-            $sql2 = "SELECT * FROM livro ORDER BY nome ASC";
+            $sql2 = "SELECT * FROM livro WHERE qtdExemplares > 0 ORDER BY nome ASC";
             $res2 = $conn->query($sql2);
 
             if ($res2->num_rows > 0) {
