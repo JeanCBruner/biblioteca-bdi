@@ -107,41 +107,45 @@ switch ($_REQUEST['acao']) {
     break;
 
     case 'excluir':
-
         $idLocacao = $_REQUEST['id_locacao'];
-        $sqlteste = "SELECT dataLocacao FROM locacao WHERE id = $idLocacao";
-
-        $res = $conn->query($sqlteste);
-
-        if ($res) {
-            $row = $res->fetch_object();
-            $dataLocacao = $row->dataLocacao;
-
-            // Agora você pode usar $dataLocacao conforme necessário
+        $sqlLocacao = "SELECT dataLocacao, livro_id FROM locacao WHERE id = $idLocacao";
+    
+        $resLocacao = $conn->query($sqlLocacao);
+    
+        if ($resLocacao) {
+            $rowLocacao = $resLocacao->fetch_object();
+            $dataLocacao = $rowLocacao->dataLocacao;
+            $livroId = $rowLocacao->livro_id;
+    
+            $dataAtual = date('Y-m-d');
+    
+            if (strtotime($dataAtual) <= strtotime($dataLocacao)) {
+                // O dia atual é igual ou inferior à dataLocacao, permitir exclusão
+                $deleteLocacaoSql = "DELETE FROM locacao WHERE id = $idLocacao";
+                $resExclusao = $conn->query($deleteLocacaoSql);
+    
+                if ($resExclusao) {
+                    // Incremento +1 na qtdExemplares do livro
+                    $sqlIncrementExemplares = "UPDATE livro SET qtdExemplares = qtdExemplares + 1 WHERE id = '$livroId'";
+                    $conn->query($sqlIncrementExemplares);
+    
+                    print "<script>alert('Locação cancelada com sucesso!');</script>";
+                } else {
+                    print "<script>alert('Não foi possível cancelar a locação!');</script>";
+                }
+            } else {
+                // O dia atual é superior à dataLocacao, mostrar mensagem de erro
+                print "<script>alert('Não é permitido cancelar locações com datas de locação passadas.');</script>";
+            }
         } else {
             // Trate o caso em que a consulta falhou
             echo "Erro ao executar a consulta: " . $conn->error;
         }
-        $dataAtual = date('Y-m-d');
-
-        if (strtotime($dataAtual) <= strtotime($dataLocacao)) {
-            // O dia atual é igual ou inferior à dataLocacao, permitir exclusão
-            // Exclusão da locação
-            $deleteLocacaoSql = "DELETE FROM locacao WHERE id = " . $_REQUEST['id_locacao'];
-            $resLocacao = $conn->query($deleteLocacaoSql);
-
-            if ($resLocacao == true) {
-                print "<script>alert('Locação cancelada com sucesso!');</script>";
-                print "<script>location.href='?page=locacao_listar';</script>";
-            } else {
-                print "<script>alert('Não foi possível cancelar a locação!');</script>";
-                print "<script>location.href='?page=locacao_listar';</script>";
-            }
-        } else {
-            // O dia atual é superior à dataLocacao, mostrar mensagem de erro
-            print "<script>alert('Não é permitido cancelar locações com datas de locação passadas.');</script>";
-            print "<script>location.href='?page=locacao_listar';</script>";
-        }
+    
+        // ... (seu código existente)
+    
+        break;
+    
 
     default:
         # code...

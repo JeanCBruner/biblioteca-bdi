@@ -15,7 +15,6 @@
                     print "<option value='" . $row->id . "'>" . $row->nome . "</option>";
                 }
             } else {
-                print "<option>Não há categorias cadastradas</option>";
             }
             ?>
         </select>
@@ -32,7 +31,7 @@
                     print "<option value='" . $row2->id . "'>" . $row2->nome . "</option>";
                 }
             } else {
-                print "<option>Não há editoras cadastradas</option>";
+
             }
             ?>
         </select>

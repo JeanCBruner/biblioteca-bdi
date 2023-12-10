@@ -40,7 +40,7 @@ $livroId = $_REQUEST['id_livro'];
     </div>
 
     <div class="mb-3">
-        <label>Marca</label>
+        <label>Editora</label>
         <select class="form-control js-example-responsive" name="editora_id_editora">
             <option>Escolha</option>
             <?php

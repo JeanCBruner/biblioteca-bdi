@@ -5,7 +5,7 @@
 
     <div class="mb-3">
         <label>Leitor</label>
-        <select class="form-control js-example-responsive" name="leitor_id_leitor">
+        <select class="form-control js-example-responsive" name="leitor_id_leitor" required>
             <?php
             $sql = "SELECT * FROM leitor ORDER BY nome ASC";
             $res = $conn->query($sql);
@@ -15,7 +15,6 @@
                     print "<option value='" . $row->id . "'>" . $row->nome . "</option>";
                 }
             } else {
-                print "<option>Não há leitores cadastradas</option>";
             }
             ?>
         </select>
@@ -23,7 +22,7 @@
 
     <div class="mb-3">
         <label>Livro</label>
-        <select class="form-control js-example-responsive" name="livro_id_livro">
+        <select class="form-control js-example-responsive" name="livro_id_livro" required>
             <?php
             $sql2 = "SELECT * FROM livro WHERE qtdExemplares > 0 ORDER BY nome ASC";
             $res2 = $conn->query($sql2);
@@ -33,24 +32,23 @@
                     print "<option value='" . $row2->id . "'>" . $row2->nome . "</option>";
                 }
             } else {
-                print "<option>Não há livros cadastrados</option>";
             }
             ?>
         </select>
     </div>
     <div class="form-group">
         <label for="data_locacao">Data de Locação</label>
-        <input type="date" name="data_locacao" class="form-control" id="data_locacao">
+        <input type="date" name="data_locacao" class="form-control" id="data_locacao" required>
     </div>
 
     <div class="form-group">
         <label for="data_devolucaoE">Data de Devolução</label>
-        <input type="date" name = "data_devolucaoE" class="form-control" id="data_devolucaoE" disabled>
+        <input type="date" name = "data_devolucaoE" class="form-control" id="data_devolucaoE" disabled required>
     </div>
 
     <div class="form-group">
         <label for="valor_locacao">Valor da Locação</label>
-        <input type="text" name="valor_locacao" class="form-control" id="valor_locacao" readonly>
+        <input type="text" name="valor_locacao" class="form-control" id="valor_locacao" readonly required>
     </div>
 
     <div class="mb-3">
