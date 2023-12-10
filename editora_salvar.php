@@ -33,7 +33,7 @@ switch ($_REQUEST['acao']) {
         $res = $conn->query($sql);
 
         if ($res==true) {
-            print "<script>alert('editora excluida com sucesso!');</script>";
+            print "<script>alert('Editora excluida com sucesso!');</script>";
             print "<script>location.href='?page=editora_listar';</script>";
         } else {
             print "<script>alert('Não foi possível excluir!');</script>";

@@ -1,4 +1,4 @@
-<h1>Editar leitor</h1>
+<h1>Editar Leitor</h1>
 
 <?php
     $sql = "SELECT * FROM leitor WHERE id = ".$_REQUEST['id_leitor'];
@@ -17,7 +17,7 @@
 
     <div class="mb-3">
         <label>Telefone</label>
-        <input type="tel" name="telefone_leitor" class="form-control" value="<?php print $row->telefone; ?>" required>
+        <input type="text" name="telefone_leitor" maxlength="11" class="form-control" value="<?php print $row->telefone; ?>" required>
     </div>
 
     <div class="mb-3">
@@ -29,3 +29,19 @@
         <button type="submit" class="btn btn-success btn-lg btn-block">Enviar</button>
     </div>
 </form>
+
+<script>
+    document.addEventListener('input', function (e) {
+        if (e.target.getAttribute('name') === 'telefone_leitor') {
+            // Remover caracteres não numéricos
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+
+            // Limitar o comprimento a pelo menos 8 dígitos
+            if (e.target.value.length < 8) {
+                e.target.setCustomValidity('Informe um número de telefone válido com pelo menos 8 dígitos.');
+            } else {
+                e.target.setCustomValidity('');
+            }
+        }
+    });
+</script>

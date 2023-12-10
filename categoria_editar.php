@@ -1,4 +1,4 @@
-<h1>Editar categoria</h1>
+<h1>Editar Categoria</h1>
 <?php
 
     $sql = "SELECT * FROM categoria WHERE id = ".$_REQUEST['id_categoria'];

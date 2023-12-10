@@ -57,7 +57,7 @@ switch ($_REQUEST['acao']) {
                 print "<script>alert('Leitor excluído com sucesso!');</script>";
                 print "<script>location.href='?page=leitor_listar';</script>";
             } else {
-                print "<script>alert('Não foi possível excluir o leitor!');</script>";
+                print "<script>alert('Não foi possível excluir o leitor.');</script>";
                 print "<script>location.href='?page=leitor_listar';</script>";
             }
         }

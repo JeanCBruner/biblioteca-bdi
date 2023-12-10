@@ -1,4 +1,4 @@
-<h1>Editar livro</h1>
+<h1>Editar Livro</h1>
 <?php
 $livroId = $_REQUEST['id_livro'];
     $sql1 = "SELECT livro.*, GROUP_CONCAT(livro_categoria.categoria_id) AS categorias

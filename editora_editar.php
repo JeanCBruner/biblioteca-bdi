@@ -1,4 +1,4 @@
-<h1>Editar editora</h1>
+<h1>Editar Editora</h1>
 <?php
 
     $sql = "SELECT * FROM editora WHERE id = ".$_REQUEST['id_editora'];
@@ -10,7 +10,7 @@
     <input type="hidden" name="id_editora" value="<?php print $row->id?>">
     <div class="mb-3">
         <label>Nome da editora</label>
-        <input type="text" name = "nome_editora" class="form-control" value="<?php print $row->nome?> ">
+        <input type="text" name = "nome_editora" class="form-control" value="<?php print $row->nome?> " required>
     </div>
     <div class="mb-3">
         <button type="submit" class = "btn btn-success btn-lg btn-block">Enviar</button>

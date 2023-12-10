@@ -1,4 +1,4 @@
-<h1>Cadastrar editora</h1>
+<h1>Cadastrar Editora</h1>
 
 <form action="?page=editora_salvar" method="POST">
     <input type="hidden" name="acao" value="cadastrar">

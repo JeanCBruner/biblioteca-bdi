@@ -5,7 +5,7 @@ switch ($_REQUEST['acao']) {
         // Dados da locação
         $dataLocacao = $_POST['data_locacao'];
         $dataDevolucaoEstimada = $_POST['data_devolucaoE'];
-        $observacoes = $_POST['observacao'];
+        $observacoesIniciais = $_POST['observacao_inicial'];
         $livroId = $_POST['livro_id_livro'];
         $leitorId = $_POST['leitor_id_leitor'];
         $statusLocacaoId = 1; // Definindo o status (assumindo que 1 é o status padrão)
@@ -30,10 +30,10 @@ switch ($_REQUEST['acao']) {
             } else {
                 // O usuário não tem locações em aberto, prosseguir com a inserção da locação
                 // Inserção da locação
-                $sqlLocacao = "INSERT INTO locacao (dataLocacao, dataDevolucaoEstimada, observacoes, livro_id, leitor_id, status_locacao_id, valorLocacao) VALUES (
+                $sqlLocacao = "INSERT INTO locacao (dataLocacao, dataDevolucaoEstimada, observacoesIniciais, livro_id, leitor_id, status_locacao_id, valorLocacao) VALUES (
                     '$dataLocacao', 
                     '$dataDevolucaoEstimada',
-                    '$observacoes',
+                    '$observacoesIniciais',
                     '$livroId', 
                     '$leitorId',
                     '$statusLocacaoId',
@@ -62,11 +62,13 @@ switch ($_REQUEST['acao']) {
         $dataDevolucaoReal = $_POST['data_devolucao_real'];
         $multa = $_POST['valor_multa'];
         $total = $_POST['valor_final'];
+        $observacoesFinais = $_POST['observacoes_finais'];
 
         $sqlLocacao = "UPDATE locacao SET
                             dataDevolucaoReal = '$dataDevolucaoReal',
                             valorMulta = '$multa',
                             valorFinal = '$total',
+                            observacoesFinais = '$observacoesFinais',
                             status_locacao_id = 2
                         WHERE
                             id = '$locacaoId'";

@@ -186,7 +186,7 @@
             include('relatorio_cliente_qtdlocacoes.php');
             break;
           default:
-            print "<h1> Seja bem vindo! Versão Final</h1>";
+            print "<h1> Bem vindo!</h1>";
         }
         ?>
       </div>

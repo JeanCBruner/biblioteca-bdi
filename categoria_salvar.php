@@ -33,7 +33,7 @@ switch ($_REQUEST['acao']) {
         $res = $conn->query($sql);
 
         if ($res==true) {
-            print "<script>alert('categoria excluida com sucesso!');</script>";
+            print "<script>alert('Categoria excluida com sucesso!');</script>";
             print "<script>location.href='?page=categoria_listar';</script>";
         } else {
             print "<script>alert('Não foi possível excluir!');</script>";

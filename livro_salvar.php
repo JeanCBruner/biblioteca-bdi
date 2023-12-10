@@ -141,7 +141,7 @@ switch ($_REQUEST['acao']) {
                         print "<script>location.href='?page=livro_listar';</script>";
                     }
                 } else {
-                    print "<script>alert('Não foi possível excluir as associações de categorias!');</script>";
+                    print "<script>alert('Não foi possível excluir as associações!');</script>";
                     print "<script>location.href='?page=livro_listar';</script>";
                 }
                 break;

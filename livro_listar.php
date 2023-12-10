@@ -1,4 +1,4 @@
-<h1>Listar livros</h1>
+<h1>Listar Livros</h1>
 
 <?php
 

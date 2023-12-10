@@ -1,4 +1,4 @@
-<h1>Editar Locação</h1>
+<h1>Finalizar Locação</h1>
 <?php
 $locacaoId = $_REQUEST['id_locacao'];
 $sql1 = "SELECT locacao.*, leitor.nome AS leitorNome, livro.nome AS livroNome
@@ -61,8 +61,13 @@ $row1 = $res1->fetch_object();
 
 
     <div class="mb-3">
-        <label>Observações</label>
-        <textarea name="observacoes" class="form-control" readonly><?php print $row1->observacoes; ?></textarea>
+        <label>Observações Iniciais</label>
+        <textarea name="observacoes_iniciais" class="form-control" readonly><?php print $row1->observacoesIniciais; ?></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label>Observações Finais</label>
+        <textarea name="observacoes_finais" class="form-control"></textarea>
     </div>
 
     <button type="submit" class="btn btn-success btn-lg btn-block">Finalizar</button>

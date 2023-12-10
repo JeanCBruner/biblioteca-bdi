@@ -3,7 +3,7 @@
 <?php
 
 $sql = "SELECT 
-             locacao.id AS idLocacao, leitor.nome AS leitorNome, livro.nome AS livroNome, dataDevolucaoEstimada, dataDevolucaoReal, dataLocacao, valorMulta, valorFinal, observacoes 
+             locacao.id AS idLocacao, leitor.nome AS leitorNome, livro.nome AS livroNome, dataDevolucaoEstimada, dataDevolucaoReal, dataLocacao, valorMulta, valorFinal, observacoesIniciais, observacoesFinais 
         FROM 
             locacao
         INNER JOIN livro ON (livro.id = locacao.livro_id)
@@ -27,7 +27,8 @@ if ($qtd > 0) {
     print "<th>Data Devolução Real</th>";
     print "<th>Valor Multa</th>";
     print "<th>Valor Final</th>";
-    print "<th>Observações</th>";
+    print "<th>Observações Iniciais</th>";
+    print "<th>Observações Finais</th>";
     print "</tr>";
     while ($row = $res->fetch_object()) {
         $dataDevolucaoEstimada = strtotime($row->dataDevolucaoEstimada);
@@ -52,7 +53,8 @@ if ($qtd > 0) {
             print "<td>Entregue no prazo</td>";
         }
         print "<td>R$ " . number_format($row->valorFinal, 2, ',', '.') . "</td>";
-        print "<td>" . $row->observacoes . "</td>";
+        print "<td>" . $row->observacoesIniciais . "</td>";
+        print "<td>" . $row->observacoesFinais . "</td>";
 
         print "</tr>";
     }

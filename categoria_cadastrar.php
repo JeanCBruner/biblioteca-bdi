@@ -1,4 +1,4 @@
-<h1>Cadastrar categoria</h1>
+<h1>Cadastrar Categoria</h1>
 
 <form action="?page=categoria_salvar" method="POST">
     <input type="hidden" name="acao" value="cadastrar">

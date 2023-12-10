@@ -1,4 +1,4 @@
-<h1>Listar categoria</h1>
+<h1>Listar Categorias</h1>
 
 <?php
 

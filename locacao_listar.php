@@ -3,7 +3,7 @@
 <?php
 
 $sql = "SELECT 
-             locacao.id AS idLocacao, leitor.nome AS leitorNome, livro.nome AS livroNome, dataDevolucaoEstimada, dataDevolucaoReal, dataLocacao, valorLocacao, valorMulta, valorFinal, observacoes 
+             locacao.id AS idLocacao, leitor.nome AS leitorNome, livro.nome AS livroNome, dataDevolucaoEstimada, dataDevolucaoReal, dataLocacao, valorLocacao, valorMulta, valorFinal, observacoesIniciais 
         FROM 
             locacao
         INNER JOIN livro ON (livro.id = locacao.livro_id)
@@ -28,14 +28,19 @@ if ($qtd > 0) {
     print "<th>Ações</th>";
     print "</tr>";
     while ($row = $res->fetch_object()) {
-        print "<tr>";
+        print "<tr";
+        $dataAtual = date('Y-m-d');
+        if (strtotime($dataAtual) > strtotime($row->dataDevolucaoEstimada)) {
+            print " style='color: red;'";
+        }
+        print ">";
+
         print "<td>" . $row->idLocacao . "</td>";
         print "<td>" . $row->leitorNome . "</td>";
         print "<td>" . $row->livroNome . "</td>";
         print "<td>" . date('d/m/Y', strtotime($row->dataLocacao)) . "</td>";
         print "<td>" . date('d/m/Y', strtotime($row->dataDevolucaoEstimada)) . "</td>";
-        print "<td>" . $row->observacoes . "</td>";
-
+        print "<td>" . $row->observacoesIniciais . "</td>";
         print "<td>
             <button onclick=\"location.href='?page=locacao_finalizar&id_locacao=" . $row->idLocacao . "';\" class ='btn btn-success btn-block'>Finalizar</button>
             <button onclick=\"if(confirm('Tem certeza que deseja cancelar?')){location.href='?page=locacao_salvar&acao=excluir&id_locacao=" . $row->idLocacao . "';}else{false;}\" class ='btn btn-danger btn-block'>Cancelar</button>

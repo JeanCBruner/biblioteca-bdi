@@ -1,4 +1,4 @@
-<h1>Listar editoras</h1>
+<h1>Listar Editoras</h1>
 
 <?php
 
