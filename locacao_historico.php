@@ -3,14 +3,23 @@
 <?php
 
 $sql = "SELECT 
-             locacao.id AS idLocacao, leitor.nome AS leitorNome, livro.nome AS livroNome, dataDevolucaoEstimada, dataDevolucaoReal, dataLocacao, valorMulta, valorFinal, observacoesIniciais, observacoesFinais 
+             locacao.id AS idLocacao, 
+             leitor.nome AS leitorNome, 
+             livro.nome AS livroNome, 
+             dataDevolucaoEstimada, 
+             dataDevolucaoReal, 
+             dataLocacao, 
+             valorMulta, 
+             valorFinal, 
+             observacoesIniciais,
+              observacoesFinais 
         FROM 
             locacao
         INNER JOIN livro ON (livro.id = locacao.livro_id)
         INNER JOIN leitor ON (leitor.id = locacao.leitor_id)
         INNER JOIN status_locacao ON (status_locacao.id = locacao.status_locacao_id)
         WHERE 
-            status_locacao_id = '2'"; // Alterado para status_locacao_id = '2' para locações finalizadas
+            status_locacao_id = '2'";
 
 $res = $conn->query($sql);
 $qtd = $res->num_rows;

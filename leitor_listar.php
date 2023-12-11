@@ -23,8 +23,11 @@ if ($qtd > 0) {
         print "<td>" . $row->telefone . "</td>";
         print "<td>" . date('d/m/Y', strtotime($row->dataNascimento)) . "</td>";
         print "<td>
-            <button onclick=\"location.href='?page=leitor_editar&id_leitor=" . $row->id . "';\" class='btn btn-primary btn-block'>Editar</button>
-            <button onclick=\"if(confirm('Tem certeza que deseja excluir?')){location.href='?page=leitor_salvar&acao=excluir&id_leitor=" . $row->id . "';}else{false;}\" class='btn btn-danger btn-block'>Excluir</button>
+            <button onclick=\"location.href='?page=leitor_editar&id_leitor=" . $row->id . "';\" 
+            class='btn btn-primary btn-block'>Editar</button>
+            <button onclick=\"if(confirm('Tem certeza que deseja excluir?'))
+            {location.href='?page=leitor_salvar&acao=excluir&id_leitor=" . $row->id . "';}else{false;}\" 
+            class='btn btn-danger btn-block'>Excluir</button>
         </td>";
         print "</tr>";
     }

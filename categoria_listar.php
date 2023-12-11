@@ -21,8 +21,11 @@ if ($qtd > 0) {
         print "<td>" . $row->nome . "</td>";
         print "<td>" . $row->descricao . "</td>";
         print "<td>
-            <button onclick=\"location.href='?page=categoria_editar&id_categoria=" . $row->id . "';\" class ='btn btn-primary btn-block'>Editar</button>
-            <button onclick=\"if(confirm('Tem certeza que deseja excluir?')){location.href='?page=categoria_salvar&acao=excluir&id_categoria=" . $row->id . "';}else{false;}\" class ='btn btn-danger btn-block'>Excluir</button>
+            <button onclick=\"location.href='?page=categoria_editar&id_categoria=" . $row->id . "';\" 
+            class ='btn btn-primary btn-block'>Editar</button>
+            <button onclick=\"if(confirm('Tem certeza que deseja excluir?'))
+            {location.href='?page=categoria_salvar&acao=excluir&id_categoria=" . $row->id . "';}else{false;}\" 
+            class ='btn btn-danger btn-block'>Excluir</button>
         </td>";
         print "</tr>";
     }

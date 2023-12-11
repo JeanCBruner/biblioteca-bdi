@@ -3,7 +3,16 @@
 <?php
 
 $sql = "SELECT 
-             locacao.id AS idLocacao, leitor.nome AS leitorNome, livro.nome AS livroNome, dataDevolucaoEstimada, dataDevolucaoReal, dataLocacao, valorLocacao, valorMulta, valorFinal, observacoesIniciais 
+            locacao.id AS idLocacao, 
+            leitor.nome AS leitorNome, 
+            livro.nome AS livroNome,
+            dataDevolucaoEstimada, 
+            dataDevolucaoReal,       
+            dataLocacao, 
+            valorLocacao,
+            valorMulta, 
+            valorFinal, 
+            observacoesIniciais 
         FROM 
             locacao
         INNER JOIN livro ON (livro.id = locacao.livro_id)

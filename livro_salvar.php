@@ -99,7 +99,8 @@ switch ($_REQUEST['acao']) {
                 if ($dependencyCount > 0) {
                     // Se existirem categorias associadas, mostrar um alerta de confirmação
                     echo "<script>
-                            if(confirm('Existem categorias associadas a este livro. Tem certeza de que deseja excluir? Isso removerá todas as associações de categorias.')) {
+                            if(confirm('Existem categorias associadas a este livro. 
+                            Tem certeza de que deseja excluir? Isso removerá todas as associações de categorias.')) {
                                 // Se confirmado, excluir associações de categorias
                                 var livroId = " . $_REQUEST['id_livro'] . ";
                                 window.location.href = '?page=livro_salvar&acao=excluir_categorias&id_livro=' + livroId;

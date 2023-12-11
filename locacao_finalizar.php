@@ -37,7 +37,8 @@ $row1 = $res1->fetch_object();
 
     <div class="mb-3">
         <label for="data_devolucao_real">Data Devolucao Real</label>
-        <input type="date" value="<?php print $row1->dataDevolucaoReal; ?>" name="data_devolucao_real" id="data_devolucao_real" class="form-control" min="<?php print $row1->dataLocacao; ?>" onchange="atualizaValorMulta()">
+        <input type="date" value="<?php print $row1->dataDevolucaoReal; ?>" name="data_devolucao_real" id="data_devolucao_real" 
+        class="form-control" min="<?php print $row1->dataLocacao; ?>" onchange="atualizaValorMulta()">
     </div>
 
     <div class="mb-3">
